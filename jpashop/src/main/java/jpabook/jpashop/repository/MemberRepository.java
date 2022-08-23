@@ -1,6 +1,8 @@
 package jpabook.jpashop.repository;
 
 import jpabook.jpashop.domain.Member;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -8,10 +10,16 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository                         //1 @Repository를 설정하면 ComponentScan에 의해 자동으로 스프링빈에서 관리
+@RequiredArgsConstructor  //9 밑에 @Autowired로 변경했으니까 이거 집어넣어주고 private final로 변경하여 코드에 통일성을 준다
 public class MemberRepository {
 
-    @PersistenceContext
-    private EntityManager em;        //2 스프링이 자동으로 EM를 만들어서 여기에 inject 해줌
+    //@Autowired  //7 Spring data JPA가 지원해줘서 @PersistenceContext를 @Autowired로 바꿀수잇고
+    //@PersistenceContext
+    private final EntityManager em;        //2 스프링이 자동으로 EM를 만들어서 여기에 inject 해줌
+
+    public MemberRepository(EntityManager em) {
+        this.em = em;
+    }
 
     /**회원 저장**/
     public void save(Member member) {
