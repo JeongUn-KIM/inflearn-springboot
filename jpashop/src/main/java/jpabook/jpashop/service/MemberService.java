@@ -3,7 +3,6 @@ package jpabook.jpashop.service;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,10 +13,6 @@ import java.util.List;
 @RequiredArgsConstructor  //8 롬복 관련 어노테이션 : final이 있는 필드만 가지고 생성자를 만듬
 public class MemberService {
     private final MemberRepository memberRepository;  //7 생성자에 주입하기 때문에 이건 이제 변경할 일이 없어서 final 줌
-    //@Autowired  //6 생성자가 하나인 경우에는 @Autowired를 명시하지 않아도 스프링이 알아서 주입해줌
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
 
 
     /* MemberRepository @Autowired Injection 방법
