@@ -1,14 +1,16 @@
 package jpabook.jpashop.domain;
 
 import jpabook.jpashop.domain.item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "order_item")
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)  //롬복: protected 접근제어자 사용한거랑 같은 역할
 public class OrderItem {
 
     @Id
@@ -26,6 +28,9 @@ public class OrderItem {
 
     private int OrderPrice;
     private int count;
+
+    protected OrderItem() {  //이걸 설정하면 OrderService에서 주문생성시 new 생성자로 만드는거 방지할 수 있음
+    }
 
     //==생성 메서드==//
     //주문을 생성하기 전에 주문아이템을 구성하는 요소들을 넣어 아이템을 생성함
